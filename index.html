@@ -1,55 +1,122 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f7f8fc">
-  <meta name="description" content="QURVIX — explore gaming, technology, entertainment, news, tools and knowledge.">
-  <title>QURVIX — Explore Everything</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="config.js"></script>
-  <script defer src="app.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QURVIX</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="config.js"></script>
+<script defer src="app.js"></script>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#"><span class="brand-mark">Q</span> QURVIX</a>
-  <nav id="mainNav">
-    <a href="#explore">Explore</a><a href="#downloads">Downloads</a><a href="#about">About</a>
-  </nav>
-  <div class="nav-actions"><button class="btn ghost" id="loginBtn">Login</button><button class="btn primary" id="signupBtn">Sign up</button><button class="btn ghost hidden" id="logoutBtn">Logout</button><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button></div>
+<header>
+<a href="#" class="brand">QURVIX</a>
+<nav id="mainNav">
+<a href="#explore">Explore</a>
+<a href="#downloads">Downloads</a>
+</nav>
+<div>
+<button id="loginBtn">Login</button>
+<button id="signupBtn">Sign Up</button>
+<button id="logoutBtn" class="hidden">Logout</button>
+</div>
 </header>
+
 <main>
 <section class="hero">
-  <div class="hero-copy">
-    <span class="eyebrow">ONE PLACE. ENDLESS DISCOVERY.</span>
-    <h1>Explore more.<br><span>Discover QURVIX.</span></h1>
-    <p>Your destination for gaming, technology, entertainment, useful tools, news and knowledge.</p>
-    <div class="hero-actions"><a class="btn primary" href="#explore">Explore website <span>→</span></a><a class="btn secondary" href="#downloads">Browse downloads</a></div>
-  </div>
-  <div class="hero-art"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="hero-card"><span class="hero-card-icon">✦</span><b>Discover what's next</b><small>Ideas, updates & useful finds</small><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+<h1>Explore Everything with QURVIX</h1>
+<p>Gaming, Technology, Entertainment, News, Tools & Knowledge.</p>
 </section>
-<section class="stats"><div><b>Explore</b><span>Multiple categories</span></div><div><b>Discover</b><span>Fresh content</span></div><div><b>Connect</b><span>Community comments</span></div></section>
-<section class="section" id="explore">
-  <div class="section-head"><div><span class="eyebrow">FIND YOUR INTEREST</span><h2>Explore categories</h2></div><p>Search and discover something new.</p></div>
-  <div class="category-row" id="categories">
-    <button class="chip active" data-cat="All">All</button><button class="chip" data-cat="Gaming">Gaming</button><button class="chip" data-cat="Technology">Technology</button><button class="chip" data-cat="Entertainment">Entertainment</button><button class="chip" data-cat="News">News</button><button class="chip" data-cat="Tools">Tools</button><button class="chip" data-cat="Knowledge">Knowledge</button>
-  </div>
-  <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search articles, games, tools..." autocomplete="off"></div>
-  <div class="content-grid" id="contentGrid"><div class="empty">Loading QURVIX content…</div></div>
+
+<section id="explore">
+<h2>Explore Content</h2>
+<div id="categories">
+<button data-cat="All">All</button>
+<button data-cat="Gaming">Gaming</button>
+<button data-cat="Technology">Technology</button>
+<button data-cat="Entertainment">Entertainment</button>
+<button data-cat="News">News</button>
+<button data-cat="Tools">Tools</button>
+<button data-cat="Knowledge">Knowledge</button>
+</div>
+<input id="searchInput" placeholder="Search content...">
+<div id="contentGrid"></div>
 </section>
-<section class="section downloads-section" id="downloads">
-  <div class="section-head"><div><span class="eyebrow">DOWNLOAD CENTER</span><h2>Useful downloads</h2></div><p>Always check the publisher and source before downloading.</p></div>
-  <div class="content-grid" id="downloadGrid"><div class="empty">Loading downloads…</div></div>
+
+<section id="downloads">
+<h2>Downloads</h2>
+<div id="downloadGrid"></div>
 </section>
-<section class="section about-section" id="about"><div><span class="eyebrow">ABOUT QURVIX</span><h2>Everything you’re curious about, in one place.</h2></div><p>QURVIX brings together useful information and discoveries across gaming, technology, entertainment, news, tools and knowledge. Content is managed by the QURVIX team. Community members can join the conversation through comments.</p></section>
+
+<section>
+<h2>About QURVIX</h2>
+<p>Discover useful content, videos and downloads in one place.</p>
+</section>
 </main>
-<footer><a class="brand" href="#"><span class="brand-mark">Q</span> QURVIX</a><span>© <span id="year"></span> QURVIX. All rights reserved.</span><div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div></footer>
 
-<dialog id="authDialog" class="modal"><form method="dialog" class="modal-close"><button aria-label="Close">×</button></form><div class="modal-body"><span class="eyebrow">WELCOME TO QURVIX</span><h2 id="authTitle">Login</h2><p id="authHint">Sign in to comment and join the community.</p><form id="authForm"><label>Email<input type="email" id="authEmail" required autocomplete="email"></label><label>Password<input type="password" id="authPassword" required minlength="6" autocomplete="current-password"></label><label id="nameField" class="hidden">Display name<input type="text" id="displayName" maxlength="40"></label><button class="btn primary full" id="authSubmit" type="submit">Login</button><p class="form-note" id="authSwitch">New here? <button type="button" class="text-btn" id="switchAuth">Create an account</button></p><p class="status" id="authStatus" aria-live="polite"></p></form></div></dialog>
+<dialog id="authDialog">
+<button type="button" onclick="document.getElementById('authDialog').close()">Close</button>
+<h2 id="authTitle">Login</h2>
+<form id="authForm">
+<label>Email<input id="authEmail" type="email" required></label>
+<label>Password<input id="authPassword" type="password" required></label>
+<label id="nameField" class="hidden">Name<input id="displayName"></label>
+<button id="authSubmit" type="submit">Login</button>
+<p id="authSwitch">New user? <button type="button" id="switchAuth">Sign up</button></p>
+<p id="authStatus"></p>
+</form>
+</dialog>
 
-<dialog id="adminDialog" class="modal wide"><form method="dialog" class="modal-close"><button aria-label="Close">×</button></form><div class="modal-body"><span class="eyebrow">QURVIX CONTROL ROOM</span><h2>Admin dashboard</h2><p>Add and manage articles and download links.</p><form id="contentForm" class="admin-form"><input type="hidden" id="editId"><label>Title<input id="itemTitle" required maxlength="120"></label><label>Category<select id="itemCategory"><option>Gaming</option><option>Technology</option><option>Entertainment</option><option>News</option><option>Tools</option><option>Knowledge</option></select></label><label>Type<select id="itemType"><option value="article">Article</option><option value="download">Download</option></select></label><label>Short description<textarea id="itemDescription" required maxlength="500" rows="3"></textarea></label><label>Image URL (optional)<input id="itemImage" type="url" placeholder="https://..."></label><label>External link (optional)<input id="itemUrl" type="url" placeholder="https://official-source.example"></label><button class="btn primary" type="submit">Save content</button><p class="status" id="adminStatus"></p></form><h3>Manage published content</h3><div id="adminList" class="admin-list"></div></div></dialog>
+<dialog id="adminDialog">
+<button type="button" onclick="document.getElementById('adminDialog').close()">Close</button>
+<h2>QURVIX Admin</h2>
+<form id="contentForm">
+<input type="hidden" id="editId">
+<label>Title<input id="itemTitle" required></label>
+<label>Category
+<select id="itemCategory">
+<option>Gaming</option><option>Technology</option>
+<option>Entertainment</option><option>News</option>
+<option>Tools</option><option>Knowledge</option>
+</select></label>
+<label>Type
+<select id="itemType">
+<option value="article">Article</option>
+<option value="download">Download</option>
+</select></label>
+<label>Description<textarea id="itemDescription" required></textarea></label>
+<label>Thumbnail Image URL<input id="itemImage" type="url"></label>
+<label>YouTube Video URL<input id="itemYoutube" type="url"></label>
+<label>Main Download / External URL<input id="itemUrl" type="url"></label>
+<label>Additional Links
+<textarea id="itemExtraLinks" placeholder="Official Website | https://example.com&#10;More Info | https://example.org"></textarea>
+</label>
+<p>One link per line: Link Name | URL</p>
+<button type="submit">Publish Content</button>
+<p id="adminStatus"></p>
+</form>
+<div id="adminList"></div>
+</dialog>
 
-<dialog id="commentsDialog" class="modal"><form method="dialog" class="modal-close"><button aria-label="Close">×</button></form><div class="modal-body"><span class="eyebrow">COMMUNITY</span><h2 id="commentsTitle">Comments</h2><div id="commentsList"></div><form id="commentForm"><label>Write a comment<textarea id="commentText" rows="3" maxlength="1000" required placeholder="Keep it respectful…"></textarea></label><button class="btn primary" type="submit">Post comment</button><p class="status" id="commentStatus"></p></form></div></dialog>
-<div id="toast" class="toast" role="status"></div>
-</body></html>
+<dialog id="commentsDialog">
+<button type="button" onclick="document.getElementById('commentsDialog').close()">Close</button>
+<h2 id="commentsTitle">Comments</h2>
+<div id="commentsList"></div>
+<form id="commentForm">
+<textarea id="commentText" placeholder="Write a comment..." required></textarea>
+<button type="submit">Post Comment</button>
+<p id="commentStatus"></p>
+</form>
+</dialog>
+
+<div id="toast"></div>
+<footer>
+<p>© QURVIX</p>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+<a href="contact.html">Contact</a>
+</footer>
+</body>
+</html>
