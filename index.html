@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>QURVIX — Explore Everything</title>
+<meta name="description" content="QURVIX is your destination for gaming, technology, entertainment, news and digital resources.">
+<style>
+:root {
+  --blue:#2563eb;
+  --dark:#172033;
+  --muted:#64748b;
+  --bg:#f5f8ff;
+  --card:#ffffff;
+  --line:#e5eaf3;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);color:var(--dark);
+}
+button,input{font:inherit}
+button,a{cursor:pointer}
+a{text-decoration:none;color:inherit}
+header{
+ background:#fff;border-bottom:1px solid var(--line);
+ position:sticky;top:0;z-index:10;
+}
+.nav{
+ max-width:1150px;margin:auto;padding:15px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.logo{font-size:27px;font-weight:900;letter-spacing:-1px;color:var(--blue)}
+.navlinks{display:flex;gap:20px;font-size:14px;color:#475569}
+.navlinks a:hover{color:var(--blue)}
+.btn{
+ border:0;border-radius:10px;padding:11px 17px;
+ background:var(--blue);color:white;font-weight:700;
+}
+.btn.secondary{background:#edf3ff;color:var(--blue)}
+.container{max-width:1150px;margin:auto;padding:24px 20px}
+.hero{
+ background:linear-gradient(115deg,#e1edff,#f5f8ff 60%,#e8f0ff);
+ border:1px solid #dce8ff;border-radius:23px;
+ padding:45px 35px;overflow:hidden;
+}
+.eyebrow{color:var(--blue);font-weight:800;font-size:12px;letter-spacing:2px}
+.hero h1{font-size:clamp(36px,6vw, sixty);font-size:clamp(36px,6vw,62px);
+ line-height:1.06;max-width:650px;margin:15px 0}
+.hero p{color:var(--muted);line-height:1.7;max-width:530px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
+.searchbox{margin:25px 0;display:flex;gap:10px}
+.searchbox input{
+ width:100%;padding:15px;border:1px solid var(--line);
+ border-radius:12px;background:#fff;outline:none;
+}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:32px 0 17px}
+.section-head h2{margin:0;font-size:23px}
+.muted{color:var(--muted);font-size:13px}
+.categories{display:flex;gap:9px;overflow-x:auto;padding:2px 0 12px}
+.chip{
+ white-space:nowrap;border:1px solid var(--line);background:#fff;
+ padding:10px 16px;border-radius:30px;color:#475569;
+}
+.chip.active{background:var(--blue);color:white;border-color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.card{
+ background:var(--card);border:1px solid var(--line);
+ border-radius:17px;overflow:hidden;transition:.2s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px #1720330d}
+.cover{
+ height:155px;display:flex;align-items:center;justify-content:center;
+ font-size:48px;background:linear-gradient(135deg,#dceaff,#edf3ff);
+}
+.card-body{padding:17px}
+.tag{font-size:11px;font-weight:800;color:var(--blue);text-transform:uppercase}
+.card h3{margin:9px 0;font-size:18px}
+.card p{font-size:13px;line-height:1.6;color:var(--muted);min-height:40px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.smallbtn{border:0;background:#edf3ff;color:var(--blue);padding:9px 12px;border-radius:9px;font-weight:700}
+.empty{display:none;padding:30px;text-align:center;color:var(--muted)}
+.feature{
+ background:white;border:1px solid var(--line);border-radius:17px;
+ padding:23px;line-height:1.7;
+}
+.feature h2{margin-top:0}
+footer{margin-top:45px;background:#101a30;color:white;padding:35px 20px}
+.footer-inner{max-width:1150px;margin:auto}
+.footer-links{display:flex;flex-wrap:wrap;gap:17px;margin:18px 0}
+.footer-links a{color:#cbd5e1;font-size:13px}
+footer p{color:#94a3b8;font-size:12px;line-height:1.7}
+.modal{
+ display:none;position:fixed;inset:0;background:#101a3080;
+ z-index:30;align-items:center;justify-content:center;padding:18px;
+}
+.modal.show{display:flex}
+.modal-box{
+ width:100%;max-width:390px;background:white;border-radius:18px;padding:24px;
+}
+.modal-box input{width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;margin:7px 0 14px}
+.close{float:right;border:0;background:#edf3ff;border-radius:8px;padding:8px}
+.notice{background:#fff7e6;padding:12px;border-radius:10px;color:#805500;font-size:12px;line-height:1.5}
+@media(max-width:750px){
+ .navlinks{display:none}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{padding:30px 22px}
+}
+@media(max-width:440px){
+ .grid{grid-template-columns:1fr}
+ .cover{height:170px}
+ .container{padding:18px 14px}
+ .nav{padding:13px 14px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <nav class="nav">
+  <a class="logo" href="#">QURVIX<span style="color:#172033">.</span></a>
+  <div class="navlinks">
+   <a href="#home">Home</a><a href="#explore">Explore</a>
+   <a href="#downloads">Downloads</a><a href="#about">About</a>
+  </div>
+  <button class="btn" onclick="openModal('login')">Login / Sign Up</button>
+ </nav>
+</header>
+
+<main class="container" id="home">
+ <section class="hero">
+  <div class="eyebrow">WELCOME TO QURVIX</div>
+  <h1>Explore Everything.<br><span style="color:#2563eb">Discover More.</span></h1>
+  <p>Your digital destination for gaming, technology, entertainment, useful tools, news and more. Everything in one place.</p>
+  <div class="hero-actions">
+   <a href="#explore"><button class="btn">Explore Now →</button></a>
+   <a href="#downloads"><button class="btn secondary">Downloads</button></a>
+  </div>
+ </section>
+
+ <div class="searchbox">
+  <input id="search" type="search" placeholder="Search games, technology, news..." oninput="renderCards()">
+ </div>
+
+ <section id="explore">
+  <div class="section-head">
+   <h2>Explore Categories</h2>
+   <span class="muted">Discover your interests</span>
+  </div>
+  <div class="categories" id="categories">
+   <button class="chip active" onclick="setCategory('All',this)">All</button>
+   <button class="chip" onclick="setCategory('Gaming',this)">🎮 Gaming</button>
+   <button class="chip" onclick="setCategory('Technology',this)">💻 Technology</button>
+   <button class="chip" onclick="setCategory('Entertainment',this)">🎬 Entertainment</button>
+   <button class="chip" onclick="setCategory('News',this)">📰 News</button>
+   <button class="chip" onclick="setCategory('Tools',this)">🛠️ Tools</button>
+   <button class="chip" onclick="setCategory('Knowledge',this)">📚 Knowledge</button>
+  </div>
+
+  <div class="section-head">
+   <h2>Latest Discoveries</h2>
+   <span class="muted">QURVIX Library</span>
+  </div>
+  <div class="grid" id="cards"></div>
+  <div class="empty" id="empty">No results found. Try another search.</div>
+ </section>
+
+ <section id="downloads">
+  <div class="section-head"><h2>Download Center</h2></div>
+  <div class="feature">
+   <h2>Find your next download.</h2>
+   <p class="muted">Discover official games, applications and useful digital resources. We link to authorized download sources.</p>
+   <p><strong>Coming soon:</strong> A curated download library.</p>
+   <a href="#explore"><button class="btn">Browse Library</button></a>
+  </div>
+ </section>
+
+ <section id="about">
+  <div class="section-head"><h2>About QURVIX</h2></div>
+  <div class="feature">
+   <h2>One platform. Many possibilities.</h2>
+   <p>QURVIX is an all-in-one digital discovery platform covering gaming, technology, entertainment, news, tools and knowledge.</p>
+   <p class="muted">Our goal is to make discovering useful digital content simple and accessible.</p>
+  </div>
+ </section>
+
+ <section id="contact">
+  <div class="section-head"><h2>Contact Us</h2></div>
+  <div class="feature">
+   <p>For feedback, business enquiries or content corrections, contact the QURVIX team.</p>
+   <p><strong>Email:</strong> Add your contact email here.</p>
+  </div>
+ </section>
+</main>
+
+<footer>
+ <div class="footer-inner">
+  <div class="logo" style="color:white">QURVIX.</div>
+  <p>Explore Everything. Discover More.</p>
+  <div class="footer-links">
+   <a href="#home">Home</a>
+   <a href="#about">About</a>
+   <a href="#contact">Contact</a>
+   <a href="privacy.html">Privacy Policy</a>
+   <a href="terms.html">Terms & Conditions</a>
+  </div>
+  <p>© <span id="year"></span> QURVIX. All rights reserved.</p>
+ </div>
+</footer>
+
+<div class="modal" id="authModal" onclick="if(event.target===this)closeModal()">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal()">✕</button>
+  <h2 id="modalTitle">Welcome Back</h2>
+  <p class="muted">QURVIX account interface</p>
+  <form onsubmit="demoAuth(event)">
+   <label>Email</label>
+   <input type="email" id="email" placeholder="Enter email" required>
+   <label>Password</label>
+   <input type="password" id="password" placeholder="Enter password" required minlength="6">
+   <button class="btn" style="width:100%" id="authSubmit">Login</button>
+  </form>
+  <p id="authMessage" class="muted"></p>
+  <div class="notice">Demo interface only. Real account registration and login will work after secure authentication setup with Supabase.</div>
+  <p><button class="smallbtn" onclick="switchAuth()">Switch Login / Sign Up</button></p>
+ </div>
+</div>
+
+<script>
+const items = [
+ {name:"Gaming Hub",cat:"Gaming",emoji:"🎮",desc:"Discover gaming news, guides, updates and game information.",url:""},
+ {name:"PC Gaming Guide",cat:"Gaming",emoji:"🖥️",desc:"Explore PC gaming tips, hardware and beginner guides.",url:""},
+ {name:"Mobile Gaming",cat:"Gaming",emoji:"📱",desc:"Discover mobile games and helpful gaming information.",url:""},
+ {name:"Tech Updates",cat:"Technology",emoji:"💻",desc:"Technology news, gadgets and digital innovation.",url:""},
+ {name:"Gadget Guide",cat:"Technology",emoji:"🎧",desc:"Explore gadgets, accessories and buying guides.",url:""},
+ {name:"AI Tools",cat:"Technology",emoji:"🤖",desc:"Discover useful AI tools and tutorials.",url:""},
+ {name:"Entertainment Hub",cat:"Entertainment",emoji:"🎬",desc:"Entertainment updates, reviews and information.",url:""},
+ {name:"Movie Updates",cat:"Entertainment",emoji:"🍿",desc:"Explore movie news and release information.",url:""},
+ {name:"Latest News",cat:"News",emoji:"📰",desc:"Read updates and stories from around the world.",url:""},
+ {name:"Useful Tools",cat:"Tools",emoji:"🛠️",desc:"Discover helpful online tools and resources.",url:""},
+ {name:"Amazing Facts",cat:"Knowledge",emoji:"🌍",desc:"Learn interesting facts about science and the world.",url:""},
+ {name:"How To Guides",cat:"Knowledge",emoji:"📚",desc:"Simple guides and tutorials for everyday learning.",url:""}
+];
+
+let activeCategory="All";
+let authMode="login";
+
+function renderCards(){
+ const query=document.getElementById("search").value.toLowerCase();
+ const filtered=items.filter(x=>
+  (activeCategory==="All"||x.cat===activeCategory)&&
+  (x.name.toLowerCase().includes(query)||x.desc.toLowerCase().includes(query)||x.cat.toLowerCase().includes(query))
+ );
+ document.getElementById("cards").innerHTML=filtered.map(x=>`
+  <article class="card">
+   <div class="cover">${x.emoji}</div>
+   <div class="card-body">
+    <span class="tag">${x.cat}</span>
+    <h3>${x.name}</h3>
+    <p>${x.desc}</p>
+    <div class="card-bottom">
+     <span class="muted">QURVIX</span>
+     <button class="smallbtn" onclick="openItem('${x.name}')">Explore →</button>
+    </div>
+   </div>
+  </article>`).join("");
+ document.getElementById("empty").style.display=filtered.length?"none":"block";
+}
+
+function setCategory(category,button){
+ activeCategory=category;
+ document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+ button.classList.add("active");
+ renderCards();
+}
+
+function openItem(name){
+ const item=items.find(x=>x.name===name);
+ if(!item)return;
+ if(item.url){window.open(item.url,"_blank","noopener");}
+ else{alert(name+" — Content page coming soon. Add your content and official links in the website code.");}
+}
+
+function openModal(mode){
+ authMode=mode;
+ document.getElementById("authModal").classList.add("show");
+ updateAuth();
+}
+function closeModal(){
+ document.getElementById("authModal").classList.remove("show");
+}
+function switchAuth(){
+ authMode=authMode==="login"?"signup":"login";
+ updateAuth();
+}
+function updateAuth(){
+ const signup=authMode==="signup";
+ document.getElementById("modalTitle").textContent=signup?"Create Account":"Welcome Back";
+ document.getElementById("authSubmit").textContent=signup?"Sign Up":"Login";
+ document.getElementById("authMessage").textContent="";
+}
+function demoAuth(event){
+ event.preventDefault();
+ document.getElementById("authMessage").textContent=
+ "This is a front-end demo. Connect Supabase authentication to enable real accounts. No credentials have been saved.";
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderCards();
+</script>
+</body>
+</html>
